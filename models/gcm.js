@@ -13,3 +13,5 @@ var Gcm = mongoose.model('Gcm',{
     }
 
 });
+
+module.exports = {Gcm}
