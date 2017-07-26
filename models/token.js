@@ -1,12 +1,15 @@
 /**
+ * Created by MUHAMAD on 07/26/2017.
+ */
+/**
  * Created by MUHAMAD on 07/24/2017.
  */
 
 var mongoose = require('mongoose');
 
-var Gcm = mongoose.model('Gcm',{
+var Token = mongoose.model('Token',{
 
-    regId: {
+    token: {
         type: String,
         required:true,
         unique:true,
@@ -14,4 +17,4 @@ var Gcm = mongoose.model('Gcm',{
 
 });
 
-module.exports = {Gcm}
+module.exports = {Token};

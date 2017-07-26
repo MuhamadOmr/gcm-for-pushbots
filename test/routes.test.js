@@ -4,5 +4,5 @@
 const expect = require('expect');
 const supertest = require('supertest');
 const {app} = require('../server');
-const {Gcm} = require('../models/gcm');
+const {Token} = require('../models/Token');
 const axios = require('axios');
