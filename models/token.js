@@ -13,10 +13,6 @@ var Token = mongoose.model('Token',{
         type: String,
         required:true,
         unique:true,
-    },
-    platform: {
-        type:  Boolean,
-        required:true
     }
 
 });
