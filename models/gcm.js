@@ -3,7 +3,7 @@
  */
 
 var mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 var Gcm = mongoose.model('Gcm',{
 
     regId: {
@@ -14,4 +14,4 @@ var Gcm = mongoose.model('Gcm',{
 
 });
 
-module.exports = {Gcm}
+module.exports = {Gcm};
