@@ -5,24 +5,24 @@ var {Gcm} = require('../models/gcm');
 const axios = require('axios');
 var jobs = function () {
 
-    // private part
+
     var validate = function ( url , data , header){
         regeId = data.to;
 
-        // make axios request with DB create in the then call
+        // make axios request and validate in the then call by reject or resolve
      return axios.post(
             url,
             {to: regeId},
             {headers: header}
         )
             .then((response) => {
-           // checking for errors in the gcm request
-               // return error message if error exist
+         //  checking for errors in the gcm request
+          //     return error message if error exist
 
                 if(response.data.results[0].error) {
-                    return Promise.reject(response.data.results[0].error);
+                    return Promise.reject(response);
                 }
-                     return Promise.resolve(response)
+               return Promise.resolve(response)
 
 
     })
@@ -32,29 +32,38 @@ var jobs = function () {
     }
 
 
-    var createToken = function (regeId , res , req) {
-        // saves the registration Id in the DB if id is valid and not registered before
-        if(Gcm.find({regId: regeId}).length){
 
-            return Promise.reject("the token is already registered");
-        }
+// execute the validate method first
+    var createToken = function (regeId) {
 
-        // saves the registration Id in the DB if id is vaild
-        Gcm.create({regId: regeId},function (err , createdReg) {
+        return validate(
+            'https://gcm-http.googleapis.com/gcm/send' ,
+            {to: regeId},
+            {
+                'Content-Type':'application/json',
+                // auth key in the config/env.js
+                'Authorization': process.env.authKey
+            }).then((response)=>{
+            //console.log(response);
 
-            if(err) {
-                res.status(400).send(err);
-            }
+            //create the record in the DB
+           return Gcm.create({regId: regeId}).then((doc)=>{
 
-            return console.log(createdReg.regId);
-
-        });
-
+                return Promise.resolve(doc);
+            }).catch((e)=>{
+                return Promise.reject(e);
+            })
+        }).catch((e)=>{
+            return Promise.reject(e);
+        })
     }
     // public part
     return {
-        // using REVEALING MODULE PATTERN
+
         validate: validate,
+        createToken: createToken,
+
+
 
     }
 

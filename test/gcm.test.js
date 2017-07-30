@@ -14,7 +14,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe.only('test methods', ()=>{
+describe('test validation method', ()=>{
 beforeEach((done)=>{
 response = {
     data:{
@@ -89,43 +89,68 @@ error ={
     })
 })
 
-describe('/Register',()=> {
-    beforeEach((done) => {
-
+describe('test Register method', ()=>{
+    beforeEach((done)=>{
+        response = {
+            data:{
+                results: [
+                    {message_id: "4445"},
+                ]
+            }
+        }
+        error ={
+            data:{
+                results: [
+                    {
+                        error: "NotRegistered"
+                    }
+                ]
+            }
+        }
+//Make the stub for both axios and validate
+        requestSend = sinon.stub(axios, 'post');
+        validateToken = sinon.stub(jobs, 'validate');
         regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
-        Gcm.remove({}).then(() => {
+        Gcm.remove({}).then(()=>{
 
             done();
 
         });
-    });
+    })
+
+    it('should add token to the database',(done)=>{
+        // STUB the validate method to resolve
+        requestSend.resolves(response);
+        validateToken.resolves(response);
+
+        jobs.createToken(regID).then((doc)=>{
+            expect(doc).to.have.property('regId');
+            done();
 
 
-    it("saved in the database ", (done) => {
+        })
 
-        // stub the axios method
-        var requestSend = sinon.stub(axios, 'post').resolves(regID);
+    }).timeout(3000);
 
-        jobs.sendReq(
-            'https://gcm-http.googleapis.com/gcm/send',
-            {to: regID},
-            {
-                'Content-Type': 'application/json',
-                // auth key in the config/env.js
-                'Authorization': process.env.authKey
-            }
-        );
-        // test the database and set timeout to make sure that axios
-        // sent the request and finished it's then call
-        setTimeout(() => {
-            Gcm.find().then((tokens) => {
-                expect(tokens.length).to.equal(1);
-                expect(tokens[0].regId).to.equal(regID);
-                //  check for the axios.post to be called
-                expect(requestSend.calledOnce.should.be.true);
-                done();
 
-            }).catch((e) => done(e));
-        } , 1900)
+    it('should NOT add token to the database',(done)=>{
+        // STUB the validate method to reject
+
+        requestSend.rejects(error);
+
+        jobs.createToken(regID).catch((Err)=>{
+            // expect to return the error
+            expect(Err).to.equal(error);
+            done();
+        })
+
+    }).timeout(3000);
+
+    afterEach((done)=>{
+        validateToken.restore();
+        requestSend.restore();
+        done();
+
     })
 })
+

@@ -12,15 +12,11 @@ router.post('/register', (req,res) => {
     // get the registration ID  from the request body
     var regId = req.body.regId;
 
-jobs.sendReq(
-        'https://gcm-http.googleapis.com/gcm/send' ,
-        {to: regId},
-        {
-            'Content-Type':'application/json',
-            // auth key in the config/env.js
-            'Authorization': process.env.authKey
-        }
-    );
+    return jobs.createToken(regId).then((response)=>{
+       console.log(response);
+    }).catch((e)=>{
+        console.log(e);
+    });
 
 });
 
