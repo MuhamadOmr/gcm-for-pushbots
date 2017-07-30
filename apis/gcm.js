@@ -27,6 +27,46 @@ jobs.sendReq(
 
 router.post('/push', (req , res ) =>{
 
+    // get the registration ID  from the request body
+    var regId = req.body.regId;
+
+    Gcm.find({regId:regId} , function(err , doc) {
+
+        if(err){
+            return res.status(400).send("token is not in the DB");
+        }
+
+
+        axios.post(
+            'https://gcm-http.googleapis.com/gcm/send',
+            { "notification": {
+                "title": "sending notification",
+
+            },
+                "to" : regId
+            },
+            {headers: {
+                'Content-Type':'application/json',
+                // auth key in the config/env.js
+                'Authorization': process.env.authKey
+            }
+            }
+        )
+        jobs.sendNoti(
+            'https://gcm-http.googleapis.com/gcm/send' ,
+            { "notification": {
+                "title": "sending notification",
+
+            },
+                "to" : regId
+            },
+            {
+                'Content-Type':'application/json',
+                // auth key in the config/env.js
+                'Authorization': process.env.authKey
+            }
+        );
+    } )
 });
 
 

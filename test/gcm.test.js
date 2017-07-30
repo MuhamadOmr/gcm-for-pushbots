@@ -13,22 +13,56 @@ var should = require('chai').should();
 var expect = chai.expect;
 var sinon = require('sinon');
 
-describe('/Register',()=> {
-    beforeEach(() => {
 
-        regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
-        Gcm.remove({});
+describe.only('test methods', ()=>{
+beforeEach((done)=>{
+response = {
+    data:{
+        results: [
+        {message_id: "4445"},
+        ]
+    }
+}
+error ={
+    data:{
+        results: [
+            {
+                error: "NotRegistered"
+            }
+        ]
+    }
+}
 
-    });
+//Make the stub
+    requestSend = sinon.stub(axios, 'post');
+    regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
+    done();
 
-    it("saved in the database ", (done) => {
+})
 
+    it('should validate and return the message id',()=>{
+        // STUB the Axios post method
 
-        // assume the promise is resolved
-        var saveDB = sinon.stub(Gcm, 'create').resolves(regID);
-        var requestSend = sinon.stub(axios, 'post').resolves(regID);
+        requestSend.resolves(response);
 
-        jobs.sendReq(
+        return jobs.validate(
+        'https://gcm-http.googleapis.com/gcm/send' ,
+        {to: regID},
+        {
+            'Content-Type':'application/json',
+            // auth key in the config/env.js
+            'Authorization': process.env.authKey
+        }
+
+    ).should.eventually.have.nested.property('data.results[0].message_id');
+
+    })
+    it('should validate and return error ',()=>{
+        // STUB the Axios post method
+
+        requestSend.resolves(error);
+
+        return jobs.validate(
             'https://gcm-http.googleapis.com/gcm/send' ,
             {to: regID},
             {
@@ -36,32 +70,55 @@ describe('/Register',()=> {
                 // auth key in the config/env.js
                 'Authorization': process.env.authKey
             }
-        );
 
+        ).should.eventually.have.nested.property('data.results[0].error');
 
-        // check for the axios.post to be called
-        expect(requestSend.calledOnce.should.be.true);
+    })
 
-        //check for the Gcm.create to be called
-        process.nextTick(function () {
-            expect(saveDB.calledOnce.should.be.false);
-        });
-
-        // check the database if the token is registered
-        expect(() => {
-            Gcm.find({regId: regID}).then((tokens) => {
-                expect(tokens.length).toBe(1);
-                expect(tokens[0].regId).toBe(regID);
-            });
-
-        });
+    afterEach((done)=>{
+        requestSend.restore();
         done();
 
-
-    });
+    })
 })
 
-describe("/push" , ()=> {
+describe('/Register',()=> {
+    beforeEach((done) => {
+
+        regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
+        Gcm.remove({}).then(() => {
+
+            done();
+
+        });
+    });
 
 
+    it("saved in the database ", (done) => {
+
+        // stub the axios method
+        var requestSend = sinon.stub(axios, 'post').resolves(regID);
+
+        jobs.sendReq(
+            'https://gcm-http.googleapis.com/gcm/send',
+            {to: regID},
+            {
+                'Content-Type': 'application/json',
+                // auth key in the config/env.js
+                'Authorization': process.env.authKey
+            }
+        );
+        // test the database and set timeout to make sure that axios
+        // sent the request and finished it's then call
+        setTimeout(() => {
+            Gcm.find().then((tokens) => {
+                expect(tokens.length).to.equal(1);
+                expect(tokens[0].regId).to.equal(regID);
+                //  check for the axios.post to be called
+                expect(requestSend.calledOnce.should.be.true);
+                done();
+
+            }).catch((e) => done(e));
+        } , 1900)
+    })
 })

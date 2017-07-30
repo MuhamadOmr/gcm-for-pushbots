@@ -9,10 +9,10 @@ var {router} = require('./apis/gcm');
 app.use(bodyParser.json());
 
 
+
 app.listen(process.env.PORT , () =>{
     console.log('started on the port 3000');
 });
-
 
 // use the routes located in apis/gcm.js
 app.use('/', router);
