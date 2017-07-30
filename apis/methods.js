@@ -18,10 +18,10 @@ var jobs = function () {
             .then((response) => {
          //  checking for errors in the gcm request
           //     return error message if error exist
-
-                if(response.data.results[0].error) {
-                    return Promise.reject(response);
-                }
+          //
+          //       if(response.data.results[0].error) {
+          //           return Promise.reject(response.data.results[0].error + "not registered with GCM");
+          //       }
                return Promise.resolve(response)
 
 
@@ -57,11 +57,21 @@ var jobs = function () {
             return Promise.reject(e);
         })
     }
+
+    var verifyInDB = function (regID){
+        return Gcm.find({regId:regID}).then((doc)=>{
+            return Promise.resolve(doc);
+        }).catch((e)=>{
+            return Promise.reject("the token is not registered in the DB");
+        })
+
+    }
     // public part
     return {
 
         validate: validate,
         createToken: createToken,
+        verifyInDB: verifyInDB
 
 
 
