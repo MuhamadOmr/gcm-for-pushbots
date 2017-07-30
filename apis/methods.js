@@ -19,12 +19,15 @@ var jobs = function () {
            // checking for errors in the gcm request
                // return error message if error exist
 
+                if(response.data.results[0].error) {
+                    return Promise.reject(response.data.results[0].error);
+                }
                      return Promise.resolve(response)
 
 
     })
        .catch((error) => {
-           console.log(error);
+           return Promise.reject(error);
     });
     }
 

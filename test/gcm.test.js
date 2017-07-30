@@ -60,7 +60,8 @@ error ={
     it('should validate and return error ',()=>{
         // STUB the Axios post method
 
-        requestSend.resolves(error);
+        // stub the promise to reject
+        requestSend.rejects(error);
 
         return jobs.validate(
             'https://gcm-http.googleapis.com/gcm/send' ,
@@ -71,7 +72,13 @@ error ={
                 'Authorization': process.env.authKey
             }
 
-        ).should.eventually.have.nested.property('data.results[0].error');
+        ).then(()=>{
+
+        }).catch((Err)=>{
+            // expect to return the error
+            expect(Err).to.equal(error);
+
+        })
 
     })
 
