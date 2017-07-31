@@ -5,7 +5,7 @@ var express =require('express');
 var bodyParser = require('body-parser');
 var app = express();
 require('./config/env');
-var {router} = require('./apis/gcm');
+var {router} = require('./apis/gcmRoutes');
 app.use(bodyParser.json());
 
 
@@ -14,7 +14,7 @@ app.listen(process.env.PORT , () =>{
     console.log('started on the port 3000');
 });
 
-// use the routes located in apis/gcm.js
+// use the routes located in apis/gcmRoutes.js
 app.use('/', router);
 
 module.exports = {app};

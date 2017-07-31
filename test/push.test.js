@@ -12,11 +12,8 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe.only('test Verify method', ()=>{
+describe('test Verify method', ()=>{
     beforeEach((done)=>{
-
-//Make the stub
-//
 
        regID =
          "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
@@ -27,10 +24,9 @@ describe.only('test Verify method', ()=>{
 
         });
 
-    })
+    });
 
     it('should verify and return the message id',(done)=>{
-        // STUB the Axios post method
 
 
         jobs.verifyInDB(regID).then((docs) => {
@@ -38,9 +34,8 @@ describe.only('test Verify method', ()=>{
             expect(docs[0].regId).to.be.equal(regID);
             done();
         }).catch((e) => done(e));
-    })
+    });
     it('should verify and return the error message',(done)=>{
-        // STUB the Axios post method
 
 
         jobs.verifyInDB({regId:"44"}).catch((e) =>{
@@ -50,7 +45,7 @@ describe.only('test Verify method', ()=>{
             done();
         });
 
-    })
+    });
 
     afterEach((done)=>{
 
@@ -59,4 +54,68 @@ describe.only('test Verify method', ()=>{
 
         })
     })
-})
+});
+
+describe('test sending notification', ()=>{
+    beforeEach((done)=>{
+        result = {
+            data:{
+                results: [
+                    {message_id: "4445"},
+                ]
+            }
+        };
+        error ={
+            data:{
+                results: [
+                    {
+                        error: "NotRegistered"
+                    }
+                ]
+            }
+        };
+
+        //Make the stub for the verify method
+        requestSend = sinon.stub(axios, 'post');
+        verifyDB = sinon.stub(jobs, 'verifyInDB');
+        sendRequest = sinon.stub(jobs, 'sendRequest');
+        regID =
+            "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
+
+        doc = [{
+            regId: regID
+        }];
+      Gcm.remove({});
+        Gcm.create({regId: regID}).then(()=>{
+            done();
+
+        });
+
+    });
+
+    it('should send notification successfully',(done)=>{
+        // STUB the Axios post , the verify and the sendRequest methods
+        verifyDB.resolves(doc);
+        sendRequest.resolves(result);
+        requestSend.resolves(result);
+
+        // test the output to equal the result
+        jobs.sendNotification(regID).then((response)=>{
+            expect(response).to.be.equal(result);
+            done();
+
+        })
+    });
+
+
+
+    afterEach((done)=>{
+        verifyDB.restore();
+        sendRequest.restore();
+        Gcm.remove({}).then(()=>{
+            done();
+
+        })
+    })
+});
+

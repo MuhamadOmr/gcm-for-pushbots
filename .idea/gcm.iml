@@ -10,6 +10,10 @@
     <content url="file://$MODULE_DIR$/node_modules" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="requirejs-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-brute-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-domain-middleware-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-route-fs-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="express-session-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="mongoose-DefinitelyTyped" level="application" />
   </component>
 </module>
