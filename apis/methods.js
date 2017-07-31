@@ -5,7 +5,6 @@ var {Gcm} = require('../models/gcm');
 const axios = require('axios');
 var jobs = function () {
 
-
     var sendRequest = function ( url , data , header){
 
         // make axios request and validate in the then call by reject or resolve
@@ -54,6 +53,7 @@ var jobs = function () {
             })
     }
 
+    
     // verify the token if it registered in the DB
     var verifyInDB = function (regID){
         return Gcm.find({regId:regID}).then((doc)=>{

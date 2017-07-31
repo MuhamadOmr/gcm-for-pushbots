@@ -39,37 +39,3 @@ router.post('/push', (req , res ) =>{
 module.exports = {router:router};
 
 
-//
-// jobs.sendNoti(
-//     'https://gcm-http.googleapis.com/gcm/send' ,
-//     { "notification": {
-//         "title": "sending notification",
-//
-//     },
-//         "to" : regId
-//     },
-//     {
-//         'Content-Type':'application/json',
-//         // auth key in the config/env.js
-//         'Authorization': process.env.authKey
-//     }
-// );
-
-
-// axios.post(
-//     'https://gcm-http.googleapis.com/gcm/send',
-//     { "notification": {
-//         "title": "sending notification",
-//
-//     },
-//         "to" : regId
-//     },
-//     {headers: {
-//         'Content-Type':'application/json',
-//         // auth key in the config/env.js
-//         'Authorization': process.env.authKey
-//     }
-//     }
-// )
-
-
