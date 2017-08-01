@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14059e7a-2627-42e4-91b4-3befcd44dcd3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/gcmRoutes.js" afterPath="$PROJECT_DIR$/apis/gcmRoutes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/methods.js" afterPath="$PROJECT_DIR$/apis/methods.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/gcm.test.js" afterPath="$PROJECT_DIR$/test/gcm.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/push.test.js" afterPath="$PROJECT_DIR$/test/push.test.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,25 +21,25 @@
     <favorites_list name="gcm" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.36214605">
+    <splitter split-orientation="horizontal" split-proportion="0.43782577">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="methods.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="methods.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apis/methods.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1380">
-                  <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+                <state relative-caret-position="460">
+                  <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
                   <folding>
-                    <marker date="1501585073426" expanded="true" signature="2458:2465" ph="{&quot;sendRequest&quot;: sendRequest...}" />
+                    <marker date="1501586796702" expanded="true" signature="2443:2450" ph="{&quot;sendRequest&quot;: sendRequest...}" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="push.test.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="push.test.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/push.test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1720">
+                <state relative-caret-position="-814">
                   <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
                   <folding />
                 </state>
@@ -48,8 +49,18 @@
           <file leaf-file-name="gcmRoutes.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apis/gcmRoutes.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="280">
-                  <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="40" />
+                <state relative-caret-position="220">
+                  <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gcm.test.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="107">
+                  <caret line="58" column="46" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="46" />
                   <folding />
                 </state>
               </provider>
@@ -62,8 +73,8 @@
           <file leaf-file-name="push.test.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/push.test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-140">
-                  <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+                <state relative-caret-position="120">
+                  <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
                   <folding />
                 </state>
               </provider>
@@ -82,8 +93,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getBasePromis</find>
-      <find>replace</find>
       <find>getBasePromise</find>
       <find>re</find>
       <find>request</find>
@@ -92,12 +101,10 @@
       <find>reject</find>
       <find>beforeea</find>
       <find>beforeEach</find>
-      <find>response</find>
       <find>doc</find>
       <find>dox</find>
       <find>v</find>
       <find>validate</find>
-      <find>then</find>
       <find>notRegisteredBefore</find>
       <find>registerToken</find>
       <find>checkToken</find>
@@ -112,6 +119,10 @@
       <find>reques</find>
       <find>regID</find>
       <find>sendRequest</find>
+      <find>findInDB</find>
+      <find>response</find>
+      <find>result</find>
+      <find>then</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\MUHAMAD\node\gcm\node_modules\axios</dir>
@@ -136,12 +147,12 @@
         <option value="$PROJECT_DIR$/test/gcmService/gcmService.test.js" />
         <option value="$PROJECT_DIR$/apis/gcm.js" />
         <option value="$PROJECT_DIR$/config/env.js" />
-        <option value="$PROJECT_DIR$/test/push.test.js" />
         <option value="$PROJECT_DIR$/apis/testy.js" />
         <option value="$PROJECT_DIR$/apis/bad validate promise.js" />
-        <option value="$PROJECT_DIR$/test/gcm.test.js" />
         <option value="$PROJECT_DIR$/apis/gcmRoutes.js" />
+        <option value="$PROJECT_DIR$/test/gcm.test.js" />
         <option value="$PROJECT_DIR$/apis/methods.js" />
+        <option value="$PROJECT_DIR$/test/push.test.js" />
       </list>
     </option>
   </component>
@@ -405,12 +416,12 @@
       <workItem from="1501534916170" duration="567000" />
       <workItem from="1501535796357" duration="16000" />
       <workItem from="1501538157645" duration="4251000" />
-      <workItem from="1501576945434" duration="8161000" />
+      <workItem from="1501576945434" duration="10034000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216978000" />
+    <option name="totallyTimeSpent" value="218851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -423,7 +434,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24720775" sideWeight="0.4738562" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24673203" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33660132" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298585" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -763,14 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apis/bad validate promise.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -779,29 +782,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/gcmRoutes.js">
+    <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="40" />
+        <state relative-caret-position="107">
+          <caret line="58" column="46" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/push.test.js">
+    <entry file="file://$PROJECT_DIR$/apis/gcmRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1720">
-          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        <state relative-caret-position="220">
+          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apis/methods.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1380">
-          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        <state relative-caret-position="460">
+          <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding>
-            <marker date="1501585073426" expanded="true" signature="2458:2465" ph="{&quot;sendRequest&quot;: sendRequest...}" />
+            <marker date="1501586796702" expanded="true" signature="2443:2450" ph="{&quot;sendRequest&quot;: sendRequest...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/push.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

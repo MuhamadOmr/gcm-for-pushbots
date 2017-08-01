@@ -14,7 +14,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe.only('test sendRequest method', ()=>{
+describe('test sendRequest method', ()=>{
 beforeEach((done)=>{
     response = {
         data:{

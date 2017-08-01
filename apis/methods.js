@@ -12,7 +12,7 @@ var jobs = function () {
     }
     else{
 
-    return Promise.resolve(response.data.results[0])
+    return Promise.resolve(response)
      }
 }
 
@@ -104,7 +104,7 @@ function findInDB(regID){
     return {
 
       createTokenB: createTokenB,
-      verifyInDBandNotify: verifyInDBandNotify
+      verifyInDBandNotify: verifyInDBandNotify,
 
 
 
