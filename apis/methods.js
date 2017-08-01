@@ -10,9 +10,10 @@ var jobs = function () {
     if(response.data.results[0].error) {
       return Promise.reject(response.data.results[0].error + "not registered with GCM");
     }
+    else{
 
     return Promise.resolve(response)
-  }
+    }  }
 
   function notRegisteredBefore (token){
     return Gcm.find({regId: regT}).then((doc) =>{
@@ -44,19 +45,21 @@ var jobs = function () {
   function saveInCreateTokenB(response2) {
     return saveToken(regT);
   }
-
-  function createTokenB(regToken) {
-    regT = regToken;
-    return axios.post(
-        'https://gcm-http.googleapis.com/gcm/send',
-        {to: regToken},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // auth key in the config/env.js
-            'Authorization': process.env.authkey
-          }
-        })
+function sendRequest(data){
+  return axios.post(
+      'https://gcm-http.googleapis.com/gcm/send',
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          // auth key in the config/env.js
+          'Authorization': process.env.authkey
+        }
+      })
+}
+  function createTokenB(data) {
+    regT = data.to;
+    return sendRequest(data)
     .then(validateInCreateTokenB)
     .then(notRegisteredInCreateTokenB)
     .then(saveInCreateTokenB)
@@ -64,57 +67,34 @@ var jobs = function () {
       console.log(e);
     })
   }
-
-  // verify the token if it registered in the DB
-  var verifyInDB = function(regID) {
+function findInDB(regID){
     return Gcm.find({regId: regID}).then((doc) => {
+      if(doc.length === 0 ){
+        return Promise.reject("the token is not registered in the DB");
+      }
       return Promise.resolve(doc);
     }).catch((e) => {
       return Promise.reject("the token is not registered in the DB");
     })
-
   }
 
-    //send notification by verifying the token is in the DB first then send the notification
-    var sendNotification = function(regID) {
-      return verifyInDB(regID).then(() => {
-        return sendRequest(
-            'https://gcm-http.googleapis.com/gcm/send',
-            {
-              "notification": {
-                "title": "sending notification",
-              },
-              "to": regID
-            },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                // auth key in the config/env.js
-                'Authorization': process.env.authKey
-              }
-            }).then((response) => {
+  function verifyInDBandNotify (regID){
+    return findInDB(regID).then(function(){
 
-          return Promise.resolve(response);
-        })
-      }).catch((e) => {
+    }).then(function(){
 
-        return Promise.reject(e);
+    })
 
-      })
-    }
+  }
 
     // public part
     return {
 
-
       createTokenB: createTokenB,
-      verifyInDB: verifyInDB,
-      sendNotification: sendNotification,
+
 
 
     }
-
-
 
 }
 module.exports = jobs()

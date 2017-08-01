@@ -34,8 +34,10 @@ beforeEach((done)=>{
     };
 
 //Make the stub for axios method
-    requestSend = sinon.stub(axios, 'post');
-    // make stub for the not registered method
+  axiosPost = sinon.stub(axios, 'post');
+    requestSend = sinon.stub(jobs, 'sendRequest');
+
+  // make stub for the not registered method
     notRegisteredB = sinon.stub(jobs, 'notRegisteredInCreateTokenB');
     regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
 
@@ -51,8 +53,9 @@ beforeEach((done)=>{
         // STUB the Axios post method to send response object
 
         requestSend.resolves(response);
-        notRegisteredB.resolves("token is not registered in the DB before");
-        return jobs.createTokenB(regID)
+      axiosPost.resolves(response);
+       notRegisteredB.resolves("token is not registered in the DB before");
+        return jobs.createTokenB({to: regID})
         .should.eventually.have.nested.include({'regId':regID});
 
     });
@@ -62,6 +65,7 @@ beforeEach((done)=>{
     // STUB the Axios post method to send response object
 
     requestSend.resolves(response);
+
     notRegisteredB.rejects("already registered");
     Gcm.find({}).then((docs)=>{
         expect(docs.length).to.be.equal(0);
@@ -83,6 +87,7 @@ beforeEach((done)=>{
     afterEach((done)=>{
         requestSend.restore();
         notRegisteredB.restore();
+      axiosPost.restore();
         done();
 
     })
