@@ -5,105 +5,116 @@ var {Gcm} = require('../models/gcm');
 const axios = require('axios');
 var jobs = function () {
 
-    var sendRequest = function ( url , data , header){
+  function validateResponseFromAxios(response) {
 
-        // make axios request and validate in the then call by reject or resolve
-     return axios.post(
-            url,
-            data,
-            {headers: header}
-        )
-         .then((response) => {
-         //  checking for errors in the gcm request
-          //     return error message if error exist
-                if(response.data.results[0].error) {
-                    return Promise.reject(response.data.results[0].error + "not registered with GCM");
-                }
+    if(response.data.results[0].error) {
+      return Promise.reject(response.data.results[0].error + "not registered with GCM");
+    }
 
-               return Promise.resolve(response)
+    return Promise.resolve(response)
+  }
+
+  function notRegisteredBefore (token){
+    return Gcm.find({regId: regT}).then((doc) =>{
+      if(doc.length){
+        // console.log(doc);
+        // console.log(token);
+        return Promise.reject("already registered");
+      }
+      else{
+        return Promise.resolve("token is not registered in the DB before")
+      }
+    })
+  }
+
+
+  function saveToken (token){
+
+    return Gcm.create({regId: token})
+
+  }
+
+  function validateInCreateTokenB(response) {
+    return validateResponseFromAxios(response)
+  }
+
+  function notRegisteredInCreateTokenB(response1) {
+    return notRegisteredBefore(regT);
+  }
+  function saveInCreateTokenB(response2) {
+    return saveToken(regT);
+  }
+
+  function createTokenB(regToken) {
+    regT = regToken;
+    return axios.post(
+        'https://gcm-http.googleapis.com/gcm/send',
+        {to: regToken},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // auth key in the config/env.js
+            'Authorization': process.env.authkey
+          }
         })
-         .catch((error) => {
-           return Promise.reject(error);
-         });
-    }
+    .then(validateInCreateTokenB)
+    .then(notRegisteredInCreateTokenB)
+    .then(saveInCreateTokenB)
+    .catch((e) => {
+      console.log(e);
+    })
+  }
 
+  // verify the token if it registered in the DB
+  var verifyInDB = function(regID) {
+    return Gcm.find({regId: regID}).then((doc) => {
+      return Promise.resolve(doc);
+    }).catch((e) => {
+      return Promise.reject("the token is not registered in the DB");
+    })
 
-
-    var createToken = function (regeId) {
-
-        // sendRequest method will validate by making a sync request
-        // no data provided in the request only the registration id
-        return sendRequest(
-            'https://gcm-http.googleapis.com/gcm/send' ,
-            {to: regeId},
-            {
-                'Content-Type':'application/json',
-                // auth key in the config/env.js
-                'Authorization': process.env.authKey
-            }).then(()=>{
-
-            //create the record in the DB
-           return Gcm.create({regId: regeId}).then((doc)=>{
-                return Promise.resolve(doc);
-
-            })
-
-            }).catch((e)=>{
-                return Promise.reject(e);
-            })
-    }
-
-    
-    // verify the token if it registered in the DB
-    var verifyInDB = function (regID){
-        return Gcm.find({regId:regID}).then((doc)=>{
-            return Promise.resolve(doc);
-        })
-            .catch((e)=>{
-            return Promise.reject("the token is not registered in the DB");
-            })
-
-    }
+  }
 
     //send notification by verifying the token is in the DB first then send the notification
-    var sendNotification = function (regID){
-   return verifyInDB(regID).then(()=>{
-       return sendRequest(
-        'https://gcm-http.googleapis.com/gcm/send',
-        { "notification": {
-            "title": "sending notification",
+    var sendNotification = function(regID) {
+      return verifyInDB(regID).then(() => {
+        return sendRequest(
+            'https://gcm-http.googleapis.com/gcm/send',
+            {
+              "notification": {
+                "title": "sending notification",
+              },
+              "to": regID
             },
-            "to" : regID
-        },
-        {headers: {
-            'Content-Type':'application/json',
-            // auth key in the config/env.js
-            'Authorization': process.env.authKey
-        }
-        }).then((response)=>{
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                // auth key in the config/env.js
+                'Authorization': process.env.authKey
+              }
+            }).then((response) => {
 
-            return Promise.resolve(response);
+          return Promise.resolve(response);
         })
-    }).catch((e)=>{
+      }).catch((e) => {
 
-            return Promise.reject(e);
+        return Promise.reject(e);
 
-        })
+      })
     }
 
     // public part
     return {
 
-        sendRequest: sendRequest,
-        createToken: createToken,
-        verifyInDB: verifyInDB,
-        sendNotification: sendNotification
 
+      createTokenB: createTokenB,
+      verifyInDB: verifyInDB,
+      sendNotification: sendNotification,
 
 
     }
 
+
+
 }
-
-
-module.exports = jobs();
+module.exports = jobs()

@@ -13,7 +13,7 @@ router.post('/register', (req,res) => {
     var regId = req.body.regId;
 
     // create the token in the DB
-    return jobs.createToken(regId).then((response)=>{
+  jobs.createTokenB(regId).then((response)=>{
        console.log(response);
     }).catch((e)=>{
         console.log(e);

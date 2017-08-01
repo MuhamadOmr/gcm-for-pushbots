@@ -14,7 +14,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe('test sendRequest method', ()=>{
+describe.only('test sendRequest method', ()=>{
 beforeEach((done)=>{
     response = {
         data:{
@@ -35,53 +35,54 @@ beforeEach((done)=>{
 
 //Make the stub for axios method
     requestSend = sinon.stub(axios, 'post');
+    // make stub for the not registered method
+    notRegisteredB = sinon.stub(jobs, 'notRegisteredInCreateTokenB');
     regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
-    done();
+
+    Gcm.remove({}).then(()=>{
+
+        done();
+
+      });
 
 });
 
-    it('should validate and return the message id',()=>{
+    it('should create token in the DB',()=>{
         // STUB the Axios post method to send response object
 
         requestSend.resolves(response);
-
-        return jobs.sendRequest(
-        'https://gcm-http.googleapis.com/gcm/send' ,
-        {to: regID},
-        {
-            'Content-Type':'application/json',
-            // auth key in the config/env.js
-            'Authorization': process.env.authKey
-
-        }).should.eventually.have.nested.property('data.results[0].message_id');
-
-    });
-    it('should validate and return error ',()=>{
-
-        // stub the promise to reject the sending of requests
-        requestSend.rejects(error);
-
-        return jobs.sendRequest(
-            'https://gcm-http.googleapis.com/gcm/send' ,
-            {to: regID},
-            {
-                'Content-Type':'application/json',
-                // auth key in the config/env.js
-                'Authorization': process.env.authKey
-            }
-
-        ).then(()=>{
-
-        }).catch((Err)=>{
-            // expect to return the error
-            expect(Err).to.equal(error);
-
-        })
+        notRegisteredB.resolves("token is not registered in the DB before");
+        return jobs.createTokenB(regID)
+        .should.eventually.have.nested.include({'regId':regID});
 
     });
 
+
+  it('should not create token in the DB if already registered',(done)=>{
+    // STUB the Axios post method to send response object
+
+    requestSend.resolves(response);
+    notRegisteredB.rejects("already registered");
+    Gcm.find({}).then((docs)=>{
+        expect(docs.length).to.be.equal(0);
+        done();
+    })
+
+  });
+  it('should not create token in the GCM rejected request',(done)=>{
+    // STUB the Axios post method to send response object
+
+    requestSend.rejects(error);
+
+    Gcm.find({}).then((docs)=>{
+      expect(docs.length).to.be.equal(1);
+      done();
+    })
+
+  });
     afterEach((done)=>{
         requestSend.restore();
+        notRegisteredB.restore();
         done();
 
     })
