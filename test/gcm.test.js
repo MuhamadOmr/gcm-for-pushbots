@@ -75,7 +75,7 @@ beforeEach((done)=>{
     requestSend.rejects(error);
 
     Gcm.find({}).then((docs)=>{
-      expect(docs.length).to.be.equal(1);
+      expect(docs.length).to.be.equal(0);
       done();
     })
 
@@ -88,69 +88,4 @@ beforeEach((done)=>{
     })
 });
 
-describe('test Register method', ()=>{
-    beforeEach((done)=>{
-        response = {
-            data:{
-                results: [
-                    {message_id: "4445"},
-                ]
-            }
-        };
-        error ={
-            data:{
-                results: [
-                    {
-                        error: "NotRegistered"
-                    }
-                ]
-            }
-        };
-//Make the stub for both axios and validate
-        requestSend = sinon.stub(axios, 'post');
-        validateToken = sinon.stub(jobs, 'sendRequest');
-        regID = "c5355j-XGEI:APA91bEkYswCt3nmHDT6FGDGMh1yioSFmYfJqcd7kURBkc6RXEuKnG_fklkLU7wX1X1zS_r5ZYmlePOGx3G6VonnaNGTrSwOSCKKi8XJqrbFDA7gtvvOOYoOmmNWV4yG0i_O0rl-0k6n";
-        Gcm.remove({}).then(()=>{
-
-            done();
-
-        });
-    });
-
-    it('should add token to the database',(done)=>{
-        // STUB the validate method to resolve
-        requestSend.resolves(response);
-        validateToken.resolves(response);
-
-        jobs.createToken(regID).then((doc)=>{
-            expect(doc).to.have.property('regId');
-            done();
-
-
-        })
-
-    }).timeout(3000);
-
-
-    it('should NOT add token to the database',(done)=>{
-        // STUB the sendRequest method to reject
-
-        requestSend.rejects(error);
-
-        jobs.createToken(regID).catch((Err)=>{
-
-            // expect to return the error
-            expect(Err).to.equal(error);
-            done();
-        })
-
-    }).timeout(3000);
-
-    afterEach((done)=>{
-        validateToken.restore();
-        requestSend.restore();
-        done();
-
-    })
-});
 

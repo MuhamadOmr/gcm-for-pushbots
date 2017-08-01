@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14059e7a-2627-42e4-91b4-3befcd44dcd3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apis/badPromisetesty.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apis/bad validate promise.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/gcmRoutes.js" afterPath="$PROJECT_DIR$/apis/gcmRoutes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apis/methods.js" afterPath="$PROJECT_DIR$/apis/methods.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/gcm.test.js" afterPath="$PROJECT_DIR$/test/gcm.test.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,17 +21,27 @@
     <favorites_list name="gcm" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43335816">
+    <splitter split-orientation="horizontal" split-proportion="0.48118812">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="methods.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="methods.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apis/methods.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="220">
-                  <caret line="11" column="5" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="11" selection-end-column="5" />
+                <state relative-caret-position="40">
+                  <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding>
                     <marker date="1501581222879" expanded="true" signature="2777:2784" ph="{&quot;sendRequest&quot;: sendRequest...}" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="bad validate promise.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/apis/bad validate promise.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -55,8 +63,8 @@
           <file leaf-file-name="gcm.test.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1049">
-                  <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+                <state relative-caret-position="517">
+                  <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -132,8 +140,9 @@
         <option value="$PROJECT_DIR$/test/push.test.js" />
         <option value="$PROJECT_DIR$/apis/testy.js" />
         <option value="$PROJECT_DIR$/apis/gcmRoutes.js" />
-        <option value="$PROJECT_DIR$/test/gcm.test.js" />
         <option value="$PROJECT_DIR$/apis/methods.js" />
+        <option value="$PROJECT_DIR$/apis/bad validate promise.js" />
+        <option value="$PROJECT_DIR$/test/gcm.test.js" />
       </list>
     </option>
   </component>
@@ -397,17 +406,18 @@
       <workItem from="1501534916170" duration="567000" />
       <workItem from="1501535796357" duration="16000" />
       <workItem from="1501538157645" duration="4251000" />
-      <workItem from="1501576945434" duration="4306000" />
+      <workItem from="1501576945434" duration="4501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213123000" />
+    <option name="totallyTimeSpent" value="213318000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24720775" sideWeight="0.5261438" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24720775" sideWeight="0.5261438" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5686275" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -470,13 +480,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/ms/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="12" column="33" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -765,9 +768,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc;n#validateResponseFromAxios#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -779,21 +780,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
+    <entry file="file://$PROJECT_DIR$/apis/methods.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1049">
-          <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state relative-caret-position="40">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <marker date="1501581222879" expanded="true" signature="2777:2784" ph="{&quot;sendRequest&quot;: sendRequest...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apis/bad validate promise.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apis/methods.js">
+    <entry file="file://$PROJECT_DIR$/test/gcm.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="11" selection-end-column="5" />
-          <folding>
-            <marker date="1501581222879" expanded="true" signature="2777:2784" ph="{&quot;sendRequest&quot;: sendRequest...}" />
-          </folding>
+        <state relative-caret-position="517">
+          <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
