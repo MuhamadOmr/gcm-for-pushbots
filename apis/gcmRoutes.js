@@ -27,7 +27,7 @@ router.post('/push', (req , res ) =>{
     // get the registration ID  from the request body
     var regId = req.body.regId;
 
-   return jobs.sendNotification(regId).then((response)=>{
+   return jobs.verifyInDBandNotify(regId).then((response)=>{
        console.log(response);
    }).catch((e)=>{
        console.log(e);

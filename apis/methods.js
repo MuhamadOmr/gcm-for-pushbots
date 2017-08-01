@@ -12,8 +12,9 @@ var jobs = function () {
     }
     else{
 
-    return Promise.resolve(response)
-    }  }
+    return Promise.resolve(response.data.results[0])
+     }
+}
 
   function notRegisteredBefore (token){
     return Gcm.find({regId: regT}).then((doc) =>{
@@ -77,12 +78,24 @@ function findInDB(regID){
       return Promise.reject("the token is not registered in the DB");
     })
   }
+  function sendNotify(){
+   return sendRequest({
+      "notification": {
+        "title": "sending notification",
+      },
+      "to": regID
+    })
+  }
 
-  function verifyInDBandNotify (regID){
-    return findInDB(regID).then(function(){
-
-    }).then(function(){
-
+  function verifyInDBandNotify (regId){
+    regID = regId;
+    return findInDB(regID)
+    .then(sendNotify)
+    .then(function(response){
+      return validateResponseFromAxios(response)
+    })
+    .catch((e) => {
+      console.log(e);
     })
 
   }
@@ -91,6 +104,7 @@ function findInDB(regID){
     return {
 
       createTokenB: createTokenB,
+      verifyInDBandNotify: verifyInDBandNotify
 
 
 
