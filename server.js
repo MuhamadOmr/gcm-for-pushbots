@@ -9,8 +9,8 @@ var {router} = require('./apis/gcmRoutes');
 app.use(bodyParser.json());
 
 
-
-app.listen(process.env.PORT , () =>{
+// this using the port in the config file
+app.listen(process.env.PORT || 3000 , () =>{
     console.log('started on the port 3000');
 });
 

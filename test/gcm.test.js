@@ -14,7 +14,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe('test sendRequest method', ()=>{
+describe('test create token , /register Endpoint', ()=>{
 beforeEach((done)=>{
     response = {
         data:{

@@ -12,7 +12,7 @@ var expect = chai.expect;
 var sinon = require('sinon');
 
 
-describe('test sending notifications', ()=>{
+describe('test sending notifications , /push endpoint', ()=>{
     beforeEach((done)=>{
       response = {
         data:{
